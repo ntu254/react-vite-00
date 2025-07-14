@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sting Việt Quốc - Năng Lượng Bùng Nổ, Hương Vị Độc Đáo</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Nền xanh xám nhạt */
+            line-height: 1.6;
+        }
+        /* Custom gradient for buttons */
+        .btn-gradient {
+            background-image: linear-gradient(to right, #8B5CF6, #6D28D9); /* Gradient tím */
+            transition: all 0.3s ease;
+        }
+        .btn-gradient:hover {
+            background-image: linear-gradient(to right, #6D28D9, #8B5CF6);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(109, 40, 217, 0.5);
+        }
+        /* Specific styling for the hero section to blend with the product */
+        .hero-bg {
+            background: linear-gradient(to bottom right, #6D28D9, #8B5CF6); /* Gradient tím cho phần hero */
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Placeholder background image - replace with actual image if available */
+            background-image: url('https://placehold.co/1920x1080/6D28D9/FFFFFF?text=Sting+Viet+Quoc+Background+Pattern');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2; /* Lớp phủ mờ */
+            z-index: 0;
+        }
+        /* Animation for product image */
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 3s infinite ease-in-out;
+        }
+        /* FAQ accordion styling */
+        .accordion-header {
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .accordion-header:hover {
+            background-color: #f3f4f6;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .accordion-content.active {
+            max-height: 200px; /* Adjust based on content height */
+            transition: max-height 0.5s ease-in;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header/Navigation -->
+    <header class="bg-white shadow-md py-4 px-6 md:px-12 flex justify-between items-center rounded-b-lg">
+        <div class="text-2xl font-extrabold text-red-600">
+            STING <span class="text-purple-600">VIỆT QUỐC</span>
+        </div>
+        <nav class="hidden md:flex space-x-6">
+            <a href="#gioi-thieu" class="text-gray-600 hover:text-red-600 font-medium transition duration-300">Giới thiệu</a>
+            <a href="#ve-san-pham" class="text-gray-600 hover:text-red-600 font-medium transition duration-300">Về sản phẩm</a>
+            <a href="#loi-ich" class="text-gray-600 hover:text-red-600 font-medium transition duration-300">Lợi ích</a>
+            <a href="#cach-thuong-thuc" class="text-gray-600 hover:text-red-600 font-medium transition duration-300">Thưởng thức</a>
+            <a href="#thu-vien" class="text-gray-600 hover:text-red-600 font-medium transition duration-300">Thư viện</a>
+            <a href="#faq" class="text-gray-600 hover:text-red-600 font-medium transition duration-300">FAQ</a>
+            <a href="#mua-ngay" class="text-gray-600 hover:text-red-600 font-medium transition duration-300">Mua ngay</a>
+        </nav>
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-button" class="md:hidden p-2 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500">
+            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+    </header>
+
+    <!-- Mobile Menu (Hidden by default) -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-4 rounded-b-lg">
+        <nav class="flex flex-col items-center space-y-4">
+            <a href="#gioi-thieu" class="text-gray-700 hover:text-red-600 font-medium transition duration-300 py-2">Giới thiệu</a>
+            <a href="#ve-san-pham" class="text-gray-700 hover:text-red-600 font-medium transition duration-300 py-2">Về sản phẩm</a>
+            <a href="#loi-ich" class="text-gray-700 hover:text-red-600 font-medium transition duration-300 py-2">Lợi ích</a>
+            <a href="#cach-thuong-thuc" class="text-gray-700 hover:text-red-600 font-medium transition duration-300 py-2">Thưởng thức</a>
+            <a href="#thu-vien" class="text-gray-700 hover:text-red-600 font-medium transition duration-300 py-2">Thư viện</a>
+            <a href="#faq" class="text-gray-700 hover:text-red-600 font-medium transition duration-300 py-2">FAQ</a>
+            <a href="#mua-ngay" class="text-gray-700 hover:text-red-600 font-medium transition duration-300 py-2">Mua ngay</a>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="gioi-thieu" class="hero-bg relative py-20 md:py-32 text-white text-center overflow-hidden rounded-b-lg">
+        <div class="relative z-10 max-w-5xl mx-auto px-6">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 drop-shadow-lg">
+                STING VIỆT QUỐC <br> Năng Lượng Bùng Nổ, Hương Vị Độc Đáo!
+            </h1>
+            <p class="text-lg md:text-xl mb-10 opacity-90 leading-relaxed">
+                Đánh thức mọi giác quan với sự kết hợp hoàn hảo giữa năng lượng mạnh mẽ của Sting và hương vị việt quốc tươi mát, sảng khoái. Sẵn sàng cho mọi thử thách!
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <a href="#mua-ngay" class="btn-gradient text-white font-bold py-3 px-8 rounded-full shadow-lg text-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50">
+                    Trải Nghiệm Ngay
+                </a>
+                <a href="#ve-san-pham" class="bg-white text-purple-700 font-bold py-3 px-8 rounded-full shadow-lg text-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
+                    Khám Phá Thêm
+                </a>
+            </div>
+        </div>
+        <!-- Product Image Placeholder -->
+        <div class="relative z-10 mt-12 md:mt-16 flex justify-center">
+            <!-- Replace 'https://placehold.co/400x500/8B5CF6/FFFFFF?text=Sting+Viet+Quoc+Can' with your actual product image URL -->
+            <img src="https://placehold.co/400x500/8B5CF6/FFFFFF?text=Sting+Viet+Quoc+Can" alt="Lon Sting Việt Quốc" class="w-64 md:w-80 lg:w-96 h-auto object-contain drop-shadow-2xl animate-pulse-slow"
+                 onerror="this.onerror=null;this.src='https://placehold.co/400x500/8B5CF6/FFFFFF?text=Lỗi+ảnh+sản+phẩm';">
+        </div>
+    </section>
+
+    <!-- About Product Section -->
+    <section id="ve-san-pham" class="py-16 md:py-24 px-6 md:px-12 bg-white rounded-lg shadow-xl mx-auto max-w-6xl mt-12 md:mt-20">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-purple-700">Về Sting Việt Quốc</h2>
+        <div class="flex flex-col md:flex-row items-center md:space-x-12">
+            <div class="md:w-1/2 mb-8 md:mb-0">
+                <!-- Replace 'https://placehold.co/600x400/8B5CF6/FFFFFF?text=Sting+Viet+Quoc+Product+Detail' with your actual product detail image URL -->
+                <img src="https://placehold.co/600x400/8B5CF6/FFFFFF?text=Sting+Viet+Quoc+Product+Detail" alt="Chi tiết sản phẩm Sting Việt Quốc" class="rounded-xl shadow-lg w-full h-auto object-cover"
+                     onerror="this.onerror=null;this.src='https://placehold.co/600x400/8B5CF6/FFFFFF?text=Lỗi+ảnh+chi+tiết';">
+            </div>
+            <div class="md:w-1/2 text-gray-700">
+                <p class="mb-6 text-lg leading-relaxed">
+                    Sting Việt Quốc là sự đột phá mới trong dòng nước tăng lực, mang đến một trải nghiệm hoàn toàn khác biệt. Được pha chế từ công thức độc quyền của Sting, kết hợp cùng hương vị việt quốc (blueberry) tự nhiên, sản phẩm không chỉ giúp bạn nạp đầy năng lượng mà còn làm bừng tỉnh vị giác với sự tươi mát và sảng khoái.
+                </p>
+                <p class="mb-6 text-lg leading-relaxed">
+                    Mỗi lon Sting Việt Quốc là sự hòa quyện giữa vị ngọt thanh, chua nhẹ đặc trưng của việt quốc và cảm giác bùng nổ năng lượng quen thuộc. Đây là lựa chọn lý tưởng để bạn vượt qua những giờ làm việc căng thẳng, những buổi học dài hay đơn giản là tìm kiếm một thức uống giải khát độc đáo.
+                </p>
+                <ul class="list-disc list-inside text-lg text-gray-600 space-y-2">
+                    <li>Hương vị việt quốc tự nhiên, độc đáo.</li>
+                    <li>Năng lượng tức thì, giúp tỉnh táo và tập trung.</li>
+                    <li>Giải khát hiệu quả, mang lại cảm giác sảng khoái.</li>
+                    <li>Thiết kế lon hiện đại, bắt mắt.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features/Benefits Section -->
+    <section id="loi-ich" class="py-16 md:py-24 px-6 md:px-12 bg-gray-50 rounded-lg shadow-xl mx-auto max-w-6xl mt-12 md:mt-20">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-red-600">Những Lợi Ích Vượt Trội</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Benefit 1: Năng Lượng Tức Thì -->
+            <div class="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-md transform hover:scale-105 transition duration-300 border border-purple-200">
+                <div class="bg-purple-600 p-4 rounded-full mb-4 shadow-lg">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-3 text-purple-800">Năng Lượng Tức Thì</h3>
+                <p class="text-gray-600 leading-relaxed">Sting Việt Quốc cung cấp nguồn năng lượng dồi dào, giúp bạn nhanh chóng lấy lại sự tỉnh táo, tập trung và sẵn sàng đối mặt với mọi thử thách trong công việc, học tập hay các hoạt động thể thao.</p>
+            </div>
+            <!-- Benefit 2: Hương Vị Độc Đáo -->
+            <div class="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-md transform hover:scale-105 transition duration-300 border border-red-200">
+                <div class="bg-red-600 p-4 rounded-full mb-4 shadow-lg">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.013 16.588L13.737 13.863M16.463 11.137L13.737 8.412M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8z"></path></svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-3 text-red-800">Hương Vị Việt Quốc Độc Đáo</h3>
+                <p class="text-gray-600 leading-relaxed">Trải nghiệm sự kết hợp mới lạ và đầy lôi cuốn của hương việt quốc tự nhiên. Vị ngọt thanh, chua nhẹ đặc trưng sẽ làm bừng tỉnh mọi giác quan, mang đến cảm giác sảng khoái bất ngờ.</p>
+            </div>
+            <!-- Benefit 3: Giải Khát Tối Ưu -->
+            <div class="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-md transform hover:scale-105 transition duration-300 border border-blue-200">
+                <div class="bg-blue-600 p-4 rounded-full mb-4 shadow-lg">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-3 text-blue-800">Giải Khát Tối Ưu</h3>
+                <p class="text-gray-600 leading-relaxed">Với vị mát lạnh và sảng khoái, Sting Việt Quốc là thức uống lý tưởng giúp xua tan cơn khát, làm dịu cơ thể trong những ngày nắng nóng hay sau những giờ vận động mệt mỏi.</p>
+            </div>
+            <!-- Benefit 4: Thiết Kế Hiện Đại -->
+            <div class="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-md transform hover:scale-105 transition duration-300 border border-green-200">
+                <div class="bg-green-600 p-4 rounded-full mb-4 shadow-lg">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2 2m-2-2h2m-2 2v2M12 18l2 2m-2-2h2m-2 2v2M18 12l2 2m-2-2h2m-2 2v2M18 6l2 2m-2-2h2m-2 2v2M12 6l2 2m-2-2h2m-2 2v2"></path></svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-3 text-green-800">Thiết Kế Hiện Đại</h3>
+                <p class="text-gray-600 leading-relaxed">Lon Sting Việt Quốc được thiết kế với màu sắc bắt mắt và phong cách hiện đại, thể hiện sự năng động và cá tính, phù hợp với giới trẻ và những người yêu thích sự mới mẻ.</p>
+            </div>
+            <!-- Benefit 5: Phù Hợp Mọi Lúc Mọi Nơi -->
+            <div class="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-md transform hover:scale-105 transition duration-300 border border-yellow-200">
+                <div class="bg-yellow-600 p-4 rounded-full mb-4 shadow-lg">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-3 text-yellow-800">Phù Hợp Mọi Lúc Mọi Nơi</h3>
+                <p class="text-gray-600 leading-relaxed">Dù bạn đang làm việc, học tập, chơi thể thao hay giải trí cùng bạn bè, Sting Việt Quốc luôn là người bạn đồng hành lý tưởng, giúp bạn duy trì năng lượng và tinh thần sảng khoái.</p>
+            </div>
+            <!-- Benefit 6: Đảm Bảo Chất Lượng -->
+            <div class="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-md transform hover:scale-105 transition duration-300 border border-indigo-200">
+                <div class="bg-indigo-600 p-4 rounded-full mb-4 shadow-lg">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.003 12.003 0 002.944 12c0 2.899 1.19 5.578 3.197 7.485L12 22.056l5.859-4.571A12.003 12.003 0 0021.056 12c0-2.899-1.19-5.578-3.197-7.485z"></path></svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-3 text-indigo-800">Đảm Bảo Chất Lượng</h3>
+                <p class="text-gray-600 leading-relaxed">Sản phẩm được sản xuất theo quy trình nghiêm ngặt, đảm bảo các tiêu chuẩn về an toàn vệ sinh thực phẩm, mang đến sự an tâm tuyệt đối cho người tiêu dùng.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Enjoy Section -->
+    <section id="cach-thuong-thuc" class="py-16 md:py-24 px-6 md:px-12 bg-purple-100 rounded-lg shadow-xl mx-auto max-w-6xl mt-12 md:mt-20">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-purple-700">Thưởng Thức Sting Việt Quốc Đúng Cách</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            <div class="text-gray-700 space-y-6">
+                <p class="text-lg leading-relaxed">
+                    Để cảm nhận trọn vẹn hương vị và năng lượng của Sting Việt Quốc, hãy thưởng thức sản phẩm theo những cách sau:
+                </p>
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 bg-purple-600 p-3 rounded-full shadow-md">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-1 text-purple-800">Uống Lạnh</h3>
+                        <p class="text-gray-600">Luôn ướp lạnh Sting Việt Quốc trước khi uống để có trải nghiệm sảng khoái nhất. Vị việt quốc sẽ càng thêm tươi mát khi được làm lạnh.</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 bg-purple-600 p-3 rounded-full shadow-md">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-1 text-purple-800">Thời Điểm Lý Tưởng</h3>
+                        <p class="text-gray-600">Tuyệt vời để uống vào giữa buổi làm việc, trước khi tập luyện, hoặc bất cứ khi nào bạn cần một cú hích năng lượng và sự tỉnh táo.</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 bg-purple-600 p-3 rounded-full shadow-md">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-1 text-purple-800">Kết Hợp Sáng Tạo</h3>
+                        <p class="text-gray-600">Bạn cũng có thể thử pha Sting Việt Quốc với một lát chanh hoặc vài viên đá để tăng thêm hương vị và sự mát lạnh.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <!-- Replace 'https://placehold.co/600x400/8B5CF6/FFFFFF?text=People+Enjoying+Sting' with your actual image URL of people enjoying Sting -->
+                <img src="https://placehold.co/600x400/8B5CF6/FFFFFF?text=People+Enjoying+Sting" alt="Người dùng thưởng thức Sting Việt Quốc" class="rounded-xl shadow-lg w-full h-auto object-cover"
+                     onerror="this.onerror=null;this.src='https://placehold.co/600x400/8B5CF6/FFFFFF?text=Lỗi+ảnh+thưởng+thức';">
+                <div class="absolute bottom-4 right-4 bg-white bg-opacity-90 px-4 py-2 rounded-lg shadow-md text-sm text-gray-700">
+                    <p class="font-semibold">Năng lượng cho mọi khoảnh khắc!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image & Video Gallery Section -->
+    <section id="thu-vien" class="py-16 md:py-24 px-6 md:px-12 bg-white rounded-lg shadow-xl mx-auto max-w-6xl mt-12 md:mt-20">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-purple-700">Thư viện Hình ảnh & Video</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <!-- Image 1 -->
+            <div class="rounded-xl overflow-hidden shadow-lg">
+                <!-- Replace 'https://placehold.co/400x300/8B5CF6/FFFFFF?text=Sting+Image+1' with your actual image URL -->
+                <img src="https://placehold.co/400x300/8B5CF6/FFFFFF?text=Sting+Image+1" alt="Hình ảnh Sting Việt Quốc 1" class="w-full h-48 object-cover transform hover:scale-105 transition duration-300"
+                     onerror="this.onerror=null;this.src='https://placehold.co/400x300/8B5CF6/FFFFFF?text=Lỗi+ảnh+1';">
+            </div>
+            <!-- Image 2 -->
+            <div class="rounded-xl overflow-hidden shadow-lg">
+                <!-- Replace 'https://placehold.co/400x300/6D28D9/FFFFFF?text=Sting+Image+2' with your actual image URL -->
+                <img src="https://placehold.co/400x300/6D28D9/FFFFFF?text=Sting+Image+2" alt="Hình ảnh Sting Việt Quốc 2" class="w-full h-48 object-cover transform hover:scale-105 transition duration-300"
+                     onerror="this.onerror=null;this.src='https://placehold.co/400x300/6D28D9/FFFFFF?text=Lỗi+ảnh+2';">
+            </div>
+            <!-- Image 3 -->
+            <div class="rounded-xl overflow-hidden shadow-lg">
+                <!-- Replace 'https://placehold.co/400x300/8B5CF6/FFFFFF?text=Sting+Image+3' with your actual image URL -->
+                <img src="https://placehold.co/400x300/8B5CF6/FFFFFF?text=Sting+Image+3" alt="Hình ảnh Sting Việt Quốc 3" class="w-full h-48 object-cover transform hover:scale-105 transition duration-300"
+                     onerror="this.onerror=null;this.src='https://placehold.co/400x300/8B5CF6/FFFFFF?text=Lỗi+ảnh+3';">
+            </div>
+            <!-- Image 4 -->
+            <div class="rounded-xl overflow-hidden shadow-lg">
+                <!-- Replace 'https://placehold.co/400x300/6D28D9/FFFFFF?text=Sting+Image+4' with your actual image URL -->
+                <img src="https://placehold.co/400x300/6D28D9/FFFFFF?text=Sting+Image+4" alt="Hình ảnh Sting Việt Quốc 4" class="w-full h-48 object-cover transform hover:scale-105 transition duration-300"
+                     onerror="this.onerror=null;this.src='https://placehold.co/400x300/6D28D9/FFFFFF?text=Lỗi+ảnh+4';">
+            </div>
+            <!-- Image 5 -->
+            <div class="rounded-xl overflow-hidden shadow-lg">
+                <!-- Replace 'https://placehold.co/400x300/8B5CF6/FFFFFF?text=Sting+Image+5' with your actual image URL -->
+                <img src="https://placehold.co/400x300/8B5CF6/FFFFFF?text=Sting+Image+5" alt="Hình ảnh Sting Việt Quốc 5" class="w-full h-48 object-cover transform hover:scale-105 transition duration-300"
+                     onerror="this.onerror=null;this.src='https://placehold.co/400x300/8B5CF6/FFFFFF?text=Lỗi+ảnh+5';">
+            </div>
+            <!-- Image 6 -->
+            <div class="rounded-xl overflow-hidden shadow-lg">
+                <!-- Replace 'https://placehold.co/400x300/6D28D9/FFFFFF?text=Sting+Image+6' with your actual image URL -->
+                <img src="https://placehold.co/400x300/6D28D9/FFFFFF?text=Sting+Image+6" alt="Hình ảnh Sting Việt Quốc 6" class="w-full h-48 object-cover transform hover:scale-105 transition duration-300"
+                     onerror="this.onerror=null;this.src='https://placehold.co/400x300/6D28D9/FFFFFF?text=Lỗi+ảnh+6';">
+            </div>
+        </div>
+
+        <h3 class="text-2xl md:text-3xl font-bold text-center mb-8 text-red-600">Video Giới Thiệu</h3>
+        <div class="flex justify-center">
+            <div class="w-full max-w-3xl rounded-xl overflow-hidden shadow-lg">
+                <!-- Replace 'https://www.w3schools.com/html/mov_bbb.mp4' with your actual video URL -->
+                <!-- Replace 'https://placehold.co/720x480/8B5CF6/FFFFFF?text=Video+Sting+Poster' with your actual video poster image URL -->
+                <video controls class="w-full h-auto" poster="https://placehold.co/720x480/8B5CF6/FFFFFF?text=Video+Sting+Poster">
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    <!-- Fallback for browsers that don't support the video tag -->
+                    Trình duyệt của bạn không hỗ trợ thẻ video. Vui lòng cập nhật trình duyệt.
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 md:py-24 px-6 md:px-12 bg-gray-50 rounded-lg shadow-xl mx-auto max-w-6xl mt-12 md:mt-20">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-red-600">Khách Hàng Nói Gì Về Chúng Tôi?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Testimonial 1 -->
+            <div class="bg-white p-8 rounded-xl shadow-md border border-gray-200">
+                <p class="text-lg italic text-gray-700 mb-6">"Sting Việt Quốc thực sự là một làn gió mới! Hương vị việt quốc rất thơm ngon và độc đáo, giúp tôi tỉnh táo ngay lập tức sau những giờ làm việc căng thẳng. Rất đáng thử!"</p>
+                <div class="flex items-center">
+                    <!-- Replace 'https://placehold.co/60x60/D1D5DB/FFFFFF?text=AV' with actual avatar image URL -->
+                    <img src="https://placehold.co/60x60/D1D5DB/FFFFFF?text=AV" alt="Avatar Khách hàng A" class="w-14 h-14 rounded-full mr-4 object-cover"
+                         onerror="this.onerror=null;this.src='https://placehold.co/60x60/D1D5DB/FFFFFF?text=Lỗi+ảnh';">
+                    <div>
+                        <p class="font-semibold text-purple-700">Nguyễn Văn A</p>
+                        <p class="text-sm text-gray-500">Sinh viên, TP.HCM</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Testimonial 2 -->
+            <div class="bg-white p-8 rounded-xl shadow-md border border-gray-200">
+                <p class="text-lg italic text-gray-700 mb-6">"Tôi là một người yêu thích các loại nước tăng lực và Sting Việt Quốc đã không làm tôi thất vọng. Vị việt quốc rất tự nhiên, không quá ngọt và mang lại cảm giác sảng khoái tức thì. Tuyệt vời cho những buổi tập gym!"</p>
+                <div class="flex items-center">
+                    <!-- Replace 'https://placehold.co/60x60/D1D5DB/FFFFFF?text=BT' with actual avatar image URL -->
+                    <img src="https://placehold.co/60x60/D1D5DB/FFFFFF?text=BT" alt="Avatar Khách hàng B" class="w-14 h-14 rounded-full mr-4 object-cover"
+                         onerror="this.onerror=null;this.src='https://placehold.co/60x60/D1D5DB/FFFFFF?text=Lỗi+ảnh';">
+                    <div>
+                        <p class="font-semibold text-purple-700">Trần Thị B</p>
+                        <p class="text-sm text-gray-500">Huấn luyện viên thể hình, Hà Nội</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 md:py-24 px-6 md:px-12 bg-blue-50 rounded-lg shadow-xl mx-auto max-w-6xl mt-12 md:mt-20">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-blue-700">Câu Hỏi Thường Gặp</h2>
+        <div class="max-w-3xl mx-auto space-y-4">
+            <!-- FAQ Item 1 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="accordion-header flex justify-between items-center p-6 border-b border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-800">Sting Việt Quốc có chứa caffeine không?</h3>
+                    <svg class="w-6 h-6 text-gray-600 transform transition-transform duration-300" data-arrow="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div class="accordion-content p-6 text-gray-700">
+                    <p>Có, Sting Việt Quốc là nước tăng lực và có chứa caffeine để giúp bạn tỉnh táo và tăng cường năng lượng. Hàm lượng caffeine được kiểm soát để đảm bảo an toàn cho người sử dụng theo khuyến nghị.</p>
+                </div>
+            </div>
+            <!-- FAQ Item 2 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="accordion-header flex justify-between items-center p-6 border-b border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-800">Ai nên sử dụng Sting Việt Quốc?</h3>
+                    <svg class="w-6 h-6 text-gray-600 transform transition-transform duration-300" data-arrow="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div class="accordion-content p-6 text-gray-700">
+                    <p>Sting Việt Quốc phù hợp với những người cần bổ sung năng lượng, tăng cường sự tỉnh táo và tập trung, đặc biệt là học sinh, sinh viên, người đi làm, hoặc những người tham gia các hoạt động thể chất.</p>
+                </div>
+            </div>
+            <!-- FAQ Item 3 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="accordion-header flex justify-between items-center p-6 border-b border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-800">Sting Việt Quốc có hương vị tự nhiên không?</h3>
+                    <svg class="w-6 h-6 text-gray-600 transform transition-transform duration-300" data-arrow="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div class="accordion-content p-6 text-gray-700">
+                    <p>Sting Việt Quốc được pha chế với hương việt quốc tự nhiên, mang đến vị chua ngọt thanh mát và sảng khoái đặc trưng của loại quả này.</p>
+                </div>
+            </div>
+            <!-- FAQ Item 4 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="accordion-header flex justify-between items-center p-6 border-b border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-800">Tôi có thể mua Sting Việt Quốc ở đâu?</h3>
+                    <svg class="w-6 h-6 text-gray-600 transform transition-transform duration-300" data-arrow="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div class="accordion-content p-6 text-gray-700">
+                    <p>Bạn có thể tìm mua Sting Việt Quốc tại các siêu thị, cửa hàng tiện lợi, tạp hóa trên toàn quốc, hoặc đặt hàng trực tuyến thông qua các sàn thương mại điện tử lớn.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section id="mua-ngay" class="py-16 md:py-24 bg-purple-700 text-white text-center rounded-lg shadow-xl mx-auto max-w-6xl mt-12 md:mt-20">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Sẵn Sàng Bùng Nổ Năng Lượng?</h2>
+        <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto opacity-90">
+            Đừng chần chừ! Trải nghiệm ngay hương vị độc đáo và năng lượng mạnh mẽ từ Sting Việt Quốc. Đặt hàng ngay hôm nay!
+        </p>
+        <a href="#" class="btn-gradient text-white font-bold py-4 px-10 rounded-full shadow-xl text-xl transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50">
+            MUA NGAY TẠI ĐÂY!
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-8 px-6 md:px-12 mt-12 md:mt-20 rounded-t-lg">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <div class="mb-4 md:mb-0">
+                <p>&copy; 2025 Sting Việt Quốc. Mọi quyền được bảo lưu.</p>
+                <p>Thương hiệu của PepsiCo.</p>
+            </div>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-white transition duration-300" aria-label="Facebook">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33V22H12c5.523 0 10-4.477 10-10z" clip-rule="evenodd"></path></svg>
+                </a>
+                <a href="#" class="hover:text-white transition duration-300" aria-label="Instagram">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.792.01 3.495.035 2.404.092 4.09 1.791 4.168 4.169.026.703.035 1.07.035 3.495v.008c0 2.43-.01 2.792-.035 3.495-.078 2.378-1.765 4.065-4.169 4.168-.703.026-1.07.035-3.495.035h-.008c-2.43 0-2.792-.01-3.495-.035-2.378-.078-4.065-1.765-4.168-4.169-.026-.703-.035-1.07-.035-3.495v-.008c0-2.43.01-2.792.035-3.495.078-2.378 1.765-4.065 4.169-4.168.703-.026 1.07-.035 3.495-.035h.008zM12 5.68c-3.46 0-6.32 2.86-6.32 6.32s2.86 6.32 6.32 6.32 6.32-2.86 6.32-6.32-2.86-6.32-6.32-6.32zm0 10.32c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4zm6.406-11.845a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4z" clip-rule="evenodd"></path></svg>
+                </a>
+                <a href="#" class="hover:text-white transition duration-300" aria-label="YouTube">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M.05 3.99c.02-.38.32-.68.7-.7h22.5c.38 0 .68.3.7.68l.05.7-.05 14.52c0 .38-.3.68-.68.7H.7c-.38 0-.68-.3-.7-.68l-.05-.7V4.69l.05-.7zM9.5 12.5v3.5l6.5-3.5-6.5-3.5v3.5z"></path></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for Mobile Menu Toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // JavaScript for FAQ Accordion
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const arrow = header.querySelector('[data-arrow="true"]');
+
+                // Close all other open accordions
+                document.querySelectorAll('.accordion-content.active').forEach(openContent => {
+                    if (openContent !== content) {
+                        openContent.classList.remove('active');
+                        openContent.previousElementSibling.querySelector('[data-arrow="true"]').classList.remove('rotate-180');
+                    }
+                });
+
+                // Toggle current accordion
+                content.classList.toggle('active');
+                arrow.classList.toggle('rotate-180');
+            });
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+    </script>
+
+</body>
+</html>
